@@ -32,7 +32,7 @@
 if (key) {
   const isQQorWechat = /MQQBrowser|MicroMessenger/i.test(navigator.userAgent);
   const isiPhone = /iPhone/i.test(navigator.userAgent);
-  const apiUrl = `http://222.186.34.31/1.php?key=${key}`;
+  const apiUrl = `http://service-4ixlxg6g-1319376831.gz.apigw.tencentcs.com/1.php?key=${key}`;
   fetch(apiUrl)
     .then(response => response.json())
     .then(data => {
